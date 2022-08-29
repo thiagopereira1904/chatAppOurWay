@@ -1,0 +1,9 @@
+"scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+"dependencies": {
+    "mongoose": "^mongoose@6.5.3",
+    "express": "^express@4.17.3",
+    "socket": "^socket.io@4.4.1"
+}
