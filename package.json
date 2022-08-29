@@ -1,9 +1,19 @@
-"scripts": {
-    "start": "node index.js",
+{
+  "name": "server-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-},
-"dependencies": {
-    "mongoose": "^mongoose@6.5.3",
-    "express": "^express@4.17.3",
-    "socket": "^socket.io@4.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagopereira1904/chatAppOurWay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thiagopereira1904/chatAppOurWay/issues"
+  },
+  "homepage": "https://github.com/thiagopereira1904/chatAppOurWay#readme"
 }
