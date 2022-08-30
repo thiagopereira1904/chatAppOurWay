@@ -1,14 +1,8 @@
-const express = require('express');
-const socketIO = require('socket.io');
+var app = require('http').createServer()
+var io = module.exports.io = require('socket.io')(app)
 
-const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
+const PORT = process.env.PORT || 3231
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-const io = socketIO(server);
 
 const mongoose = require("mongoose");
 const mongoDB = "mongodb+srv://thiago-psilva2812:dpmp658450@cluster0.wjabzhu.mongodb.net/message-database?retryWrites=true&w=majority";
@@ -18,7 +12,6 @@ const Msg = require('./models/messages');
 mongoose.connect(mongoDB).then(()=>{
   console.log("conectado");
 });
-
 
 
 
@@ -65,3 +58,6 @@ io.on('connection', (socket) => {
 
   });
 
+  app.listen(PORT, ()=>{
+    console.log("Connected to port:" + PORT);
+  })
