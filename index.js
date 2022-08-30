@@ -1,9 +1,14 @@
 const express = require('express');
-const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const { instrument } = require("@socket.io/admin-ui");
+const socketIO = require('socket.io');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = socketIO(server);
 
 const mongoose = require("mongoose");
 const mongoDB = "mongodb+srv://thiago-psilva2812:dpmp658450@cluster0.wjabzhu.mongodb.net/message-database?retryWrites=true&w=majority";
@@ -14,24 +19,6 @@ mongoose.connect(mongoDB).then(()=>{
   console.log("conectado");
 });
 
-const io = new Server(server, {
-  cors: {
-    origin: ["https://admin.socket.io"],
-    credentials: true
-  }
-});
-
-
-instrument(io, {
-  auth: false
-});
-
-app.use(express.json());
-
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-  });
 
 
 
@@ -78,7 +65,3 @@ io.on('connection', (socket) => {
 
   });
 
-
-server.listen(3000, () => {
-  console.log('listening on *:3000');
-});

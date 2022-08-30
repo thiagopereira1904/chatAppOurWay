@@ -1,7 +1,6 @@
 {
   "name": "server-chat",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,11 @@
   "bugs": {
     "url": "https://github.com/thiagopereira1904/chatAppOurWay/issues"
   },
-  "homepage": "https://github.com/thiagopereira1904/chatAppOurWay#readme"
+  "homepage": "https://github.com/thiagopereira1904/chatAppOurWay#readme",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1"
+  }
 }
