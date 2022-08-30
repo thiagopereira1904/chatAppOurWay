@@ -1,9 +1,26 @@
-const express = require("express")
+const express = require('express')
 const app = express()
-const server = require("http").Server(app)
-const io = module.exports.io = require('socket.io')(server)
 
-const PORT = process.env.PORT || 3231
+app.use(express.static("public"))
+
+const http = require('http').Server(app)
+
+const io = require('socket.io')(http)
+
+const porta = process.env.PORT || 8000
+
+http.listen(porta, function(){
+  const portaStr = porta === 80 ? '' :  ':' + porta
+
+  if (process.env.HEROKU_APP_NAME) 
+      console.log('Servidor iniciado. Abra o navegador em ' + host)
+  else console.log('Servidor iniciado. Abra o navegador em ' + host + portaStr)
+})
+
+app.get('/', function (requisicao, resposta) {
+  resposta.sendFile(__dirname + '/index.html')
+})
+
 const mongoose = require("mongoose");
 const mongoDB = "mongodb+srv://thiago-psilva2812:dpmp658450@cluster0.wjabzhu.mongodb.net/message-database?retryWrites=true&w=majority";
 
@@ -12,6 +29,23 @@ const Msg = require('./models/messages');
 mongoose.connect(mongoDB).then(()=>{
   console.log("conectado");
 });
+
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+
+instrument(io, {
+  auth: false
+});
+
+app.use(express.json());
+
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
 
 
 
@@ -58,6 +92,3 @@ io.on('connection', (socket) => {
 
   });
 
-  server.listen(PORT, ()=>{
-    console.log("Connected to port:" + PORT);
-  })
