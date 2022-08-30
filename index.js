@@ -1,9 +1,9 @@
-var app = require('http').createServer()
-var io = module.exports.io = require('socket.io')(app)
+const express = require("express")
+const app = express()
+const server = require("http").Server(app)
+const io = module.exports.io = require('socket.io')(server)
 
 const PORT = process.env.PORT || 3231
-
-
 const mongoose = require("mongoose");
 const mongoDB = "mongodb+srv://thiago-psilva2812:dpmp658450@cluster0.wjabzhu.mongodb.net/message-database?retryWrites=true&w=majority";
 
@@ -58,6 +58,6 @@ io.on('connection', (socket) => {
 
   });
 
-  app.listen(PORT, ()=>{
+  server.listen(PORT, ()=>{
     console.log("Connected to port:" + PORT);
   })
